@@ -141,7 +141,8 @@ pct <- round(vol/sum(vol)*100)
 Age_groups <- paste(Age_groups, pct) # add percents to labels
 Age_groups <- paste(Age_groups,"%",sep="") # ad % to labels
 Age_distribution <- pie(x=vol, labels = Age_groups, radius = 1,
-                        main = "Age distribution of Participants", col=c("green","yellow","blue","purple"), clockwise = T)
+                        main = "Age distribution of Participants", col=c("green","yellow","blue","purple"), 
+                        clockwise = T)
 ```
 
 
@@ -201,7 +202,8 @@ Voters4 <- tibble(vote, medical_insurance, Opinion_on_medical_insurance)
 Voter_table_4 <- data.frame(Voters4)
 
 voters_by_Medical_insurance <- ggplot(Voter_table_4, 
-                                      aes(x = medical_insurance, fill = Opinion_on_medical_insurance)) + geom_bar(aes(y = (..count..)/sum(..count..))) + 
+                                      aes(x = medical_insurance, fill = Opinion_on_medical_insurance)) + 
+  geom_bar(aes(y = (..count..)/sum(..count..))) + 
           scale_y_continuous(labels = scales::percent)+
     theme_classic() +
   labs(title = "Percentage of Medical Investment from Each Party and
