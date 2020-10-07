@@ -1,8 +1,11 @@
 ---
-title: " How do Progressive Conservative Party in Manitoba attract more voters in the upcoming election?"
-authors: "Zhifei Cao, Yuanxi Gong, Jinwen Tao"
+title: ' How do Progressive Conservative Party in Manitoba attract more voters in
+  the upcoming election?'
+authors: Zhifei Cao, Yuanxi Gong, Jinwen Tao
 date: '2020-10-07'
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -17,66 +20,90 @@ set.seed(1234)
 
 # The probability of the number of supporters for each party:
 
-vote <- sample( c("L","C", "G", "N", "O", "Undecided", "Prefer not to say"), 
-size = 1000, prob = c(0.14, 0.47, 0.06, 0.31, 0.01, 0.007, 0.0003), replace = TRUE)
-#There are 8 different choices for the voters : “L”stands for Liberal Party,
-"C" stands for Progressive Conservative Party, "G" stands for Green Party, 
-"N"stands for New Democratic Party,"O" stands for Other, "Undecided" stands 
-for uncertain about voting and "Prefer not to say" stands for prefer not to answer this question. 
+vote <- sample( c("L","C", "G", "N", "O", "Undecided", "Prefer not to say"),
+                size = 1000, 
+                prob = c(0.14, 0.47, 0.06, 0.31, 0.01, 0.007, 0.0003), 
+                replace = TRUE)
+#There are 8 different choices for the voters : “L”stands for Liberal Party
+#"C" stands for Progressive Conservative Party, "G" stands for Green Party
+#"N"stands for New Democratic Party,"O" stands for Other
+#"Undecided" stands for uncertain about voting and 
+#"Prefer not to say" stands for prefer not to answer this question. 
 
 
 # The proportion of the genders of the respondents:
-gender <- sample( c("M","F"), 1000, prob = c(0.49, 0.51), replace = TRUE)
+gender <- sample( c("M","F"), 1000, prob = c(0.49, 0.51), 
+                  replace = TRUE)
 # "M" stands for male and "F" stands for female
 
 # The proportion of participants in different groups:
-age <- sample(c("18-29", "30-44", "45-64", "Over 65"), size = 1000, prob =c(0.3, 0.35, 0.2, 0.15), replace = TRUE)
-#"18-29"stands for 18 to 29 years old, "30-44"stands for 30 to 44 years old,
-"45-64" stands for 45 to 64 years old and "Over 65" stands for over 65 years old
+age <- sample(c("18-29", "30-44", "45-64", "Over 65"),
+              size = 1000, prob =c(0.3, 0.35, 0.2, 0.15), replace = TRUE)
+#"18-29"stands for 18 to 29 years old, 
+#"30-44"stands for 30 to 44 years old, "45-64" stands for 45 to 64 years old 
+#and "Over 65" stands for over 65 years old
 
 # The proportion of respondents' religious belief:
-religion <- sample(c("None", "Buddhist", "Jewish", "Muslim", "Christian", "Hindu", "Other"),
-size = 1000, prob =c(0.29, 0.01, 0.015, 0.02, 0.65, 0.01, 0.005), replace = TRUE)
-# "None" stands for no religious belief and "Other" stands for other beliefs exclude 
-from Buddhism, Judaism, Muslim, Christianism and Hinduism. 
+religion <- sample(c("None", "Buddhist", "Jewish", "Muslim",
+                     "Christian", "Hindu", "Other"),
+                   size = 1000, prob =c(0.29, 0.01, 0.015, 0.02,
+                                        0.65, 0.01, 0.005),
+                   replace = TRUE)
+# "None" stands for no religious belief and "Other" stands for other beliefs 
+# exclude from Buddhism, Judaism, Muslim, Christianism and Hinduism. 
 
-# Use normal distribution to simulate the voters' income randomlywith their average annual 
-income at 124000 Canadian dollars:
+# Use normal distribution to simulate the voters' income randomly 
+# with their average annual income at 124000 Canadian dollars:
 income <- rnorm(1000, mean = 124000, sd = 10000)
 
 
 # The proportion of investment of each party in education:
-education_investment <- sample(c("L","C", "G", "N", "O"), size = 1000, prob =c(0.45, 0.25, 0.1, 0.18, 0.02), 
-replace = TRUE)
+education_investment <- sample(c("L","C", "G", "N", "O"), size = 1000,
+                               prob =c(0.45, 0.25, 0.1, 0.18, 0.02),
+                               replace = TRUE)
 
 # The proportion of respondents' education level:
 education_level <- sample(c("Some high school with no diploma or lower",
-"High school graduate, diploma or the equivalent", "Bachelor’s degree", "Master’s degree or higher"),
-size = 1000, prob =c(0.13, 0.51, 0.25, 0.11), replace = TRUE)
+                            "High school graduate, diploma or the equivalent", 
+                            "Bachelor’s degree", "Master’s degree or higher"),
+                          size = 1000, prob =c(0.13, 0.51, 0.25, 0.11),
+                          replace = TRUE)
 
 # The proportion of degree of emphasis on education diploma:
-emphasis_on_education_diploma <- sample(c("Very important","Important", "Not important",
-"Do not know/ Do not want to answer"), size = 1000, prob =c(0.33, 0.49, 0.15, 0.03), replace = TRUE)
+emphasis_on_education_diploma <- sample(c("Very important","Important",
+                                          "Not important", 
+                                          "Do not know/ Do not want to answer"),
+                                        size = 1000, 
+                                        prob =c(0.33, 0.49, 0.15, 0.03),
+                                        replace = TRUE)
 
 
 
 # The proportion of each Party that invests in medical insurance:
-medical_insurance <- sample(c("L","C", "G", "N", "O"), size = 1000, prob =c(0.17, 0.18, 0.35, 0.28, 0.02), replace = TRUE)
+medical_insurance <- sample(c("L","C", "G", "N", "O"), size = 1000,
+                            prob =c(0.17, 0.18, 0.35, 0.28, 0.02),
+                            replace = TRUE)
 
 # The proportion of degree of emphasis on medical insurance:
 Opinion_on_medical_insurance <- sample(c("Very important","Important", 
-"Not important", "Do not know/ Do not want to answer"), 
-size = 1000, prob =c(0.59, 0.24, 0.16, 0.01), replace = TRUE)
+                                         "Not important",
+                                         "Do not know/ Do not want to answer"), 
+                                       size = 1000, prob =c(0.59, 0.24, 0.16, 0.01),
+                                       replace = TRUE)
 
 
 
 # The proportion of each Party that takes action on increasing the employment rate:
-employment_investment <- sample(c("L","C", "G", "N", "O"), size = 1000, 
-prob =c(0.2, 0.35, 0.11, 0.3, 0.04), replace = TRUE)
+employment_investment <- sample(c("L","C", "G", "N", "O"), size = 1000,
+                                prob =c(0.2, 0.35, 0.11, 0.3, 0.04), 
+                                replace = TRUE)
 
 # The proportion of degree of difficulty on seeking a job:
-difficulty_on_job_seeking <- sample(c("Very hard","Hard", "Not hard", 
-"Do not know/ Do not want to answer"), size = 1000, prob =c(0.08, 0.42, 0.35, 0.05), replace = TRUE)
+difficulty_on_job_seeking <- sample(c("Very hard","Hard", 
+                                      "Not hard", 
+                                      "Do not know/ Do not want to answer"),
+                                    size = 1000, prob =c(0.08, 0.42, 0.35, 0.05),
+                                    replace = TRUE)
 
 ```
 
@@ -89,7 +116,8 @@ Voter_table <- data.frame(Voters)
 voters_by_gender <- Voter_table %>%
   ggplot(aes(x = vote, fill = gender)) + 
   geom_bar(color = 'black', position = 'dodge') + 
-  labs(title = "Supporters of Each Party Divide by Gender", x = "Different Parties", y = "Count of Votes") + theme_minimal()
+  labs(title = "Supporters of Each Party Divide by Gender",
+       x = "Different Parties", y = "Count of Votes") + theme_minimal()
 voters_by_gender
 
 ```
@@ -106,19 +134,21 @@ table(population_age_vs_vote)
 ```{r}
 #Figure 3: Graph 1.2
 # The age distribution of our participants
-Age_groups <- c("18 to 29 years old", "30 to 44 years old", "45 to 64 years old", "Over 65 years old")
+Age_groups <- c("18 to 29 years old", "30 to 44 years old",
+                "45 to 64 years old", "Over 65 years old")
 vol <- c(300, 350, 200, 150)
 pct <- round(vol/sum(vol)*100)
 Age_groups <- paste(Age_groups, pct) # add percents to labels
 Age_groups <- paste(Age_groups,"%",sep="") # ad % to labels
 Age_distribution <- pie(x=vol, labels = Age_groups, radius = 1,
-main = "Age distribution of Participants", col=c("green","yellow","blue","purple"), clockwise = T)
+                        main = "Age distribution of Participants", col=c("green","yellow","blue","purple"), clockwise = T)
 ```
 
 
 ```{r}
 #Figure 4: Table 1.2
-# The number of respondents with different religious believes that vote for each party:
+# The number of respondents with different religious believes 
+# that vote for each party:
 population_religion_vs_vote <- data.frame(religion, vote)
 table(population_religion_vs_vote)
 ```
@@ -134,25 +164,30 @@ Voter_table_3 <- data.frame(Voters3)
 ggplot(Voter_table_3, aes(x = income)) +
   geom_histogram(aes(color = vote, fill = vote), 
                 position = "identity", bins = 30, alpha = 0.4) +
-  labs(xlim = c(31300,551000),title = "Annual Income level of Supporters of Different Parties",
+  labs(xlim = c(31300,551000),title = "Annual Income level of 
+       Supporters of Different Parties",
        x = "Income level in Canadian dollars",
        y = "Count of Votes")+
-  facet_grid(vote ~ ., scales = "free")+ geom_vline( xintercept = mean(income),linetype = "dashed")
+  facet_grid(vote ~ ., scales = "free")+
+  geom_vline( xintercept = mean(income),linetype = "dashed")
 ```
 
 
 
 ```{r}
 #Figure 6: Graph 2.1
-# Investment on decreasing Unemployment from each party and Participants' difficulty on job seeking
+# Investment on decreasing Unemployment from each party and Participants'
+# difficulty on job seeking：
 Voters2 <- tibble(vote, employment_investment, difficulty_on_job_seeking)
 Voter_table_2 <- data.frame(Voters2)
 
-voters_by_employment <- ggplot(Voter_table_2, aes(x = employment_investment, fill = difficulty_on_job_seeking)) 
-+ geom_bar(aes(y = (..count..)/sum(..count..))) + 
-          scale_y_continuous(labels=percent)+
-    theme_classic() +
-  labs(title = "Percentage of Investment on Decreasing Unemployment From Each Party and Difficulty on Job Seeking",
+voters_by_employment <- ggplot(Voter_table_2,
+                               aes(x = employment_investment,
+                                   fill = difficulty_on_job_seeking)) + 
+  geom_bar(aes(y = (..count..)/sum(..count..))) + 
+         scale_y_continuous(labels = scales::percent)+
+  labs(title = "Percentage of Investment on Decreasing Unemployment
+       From Each Party and Difficulty on Job Seeking",
        x = "Different Parties",
        y = "Percentage") 
 voters_by_employment
@@ -165,11 +200,12 @@ voters_by_employment
 Voters4 <- tibble(vote, medical_insurance, Opinion_on_medical_insurance)
 Voter_table_4 <- data.frame(Voters4)
 
-voters_by_Medical_insurance <- ggplot(Voter_table_4, aes(x = medical_insurance, fill = Opinion_on_medical_insurance)) 
-+ geom_bar(aes(y = (..count..)/sum(..count..))) + 
-          scale_y_continuous(labels=percent)+
+voters_by_Medical_insurance <- ggplot(Voter_table_4, 
+                                      aes(x = medical_insurance, fill = Opinion_on_medical_insurance)) + geom_bar(aes(y = (..count..)/sum(..count..))) + 
+          scale_y_continuous(labels = scales::percent)+
     theme_classic() +
-  labs(title = "Percentage of Medical Investment from Each Party and Participants' Opinion on Medical Investment ",
+  labs(title = "Percentage of Medical Investment from Each Party and
+       Participants' Opinion on Medical Investment ",
        x = "Different Parties",
        y = "Percentage") 
 voters_by_Medical_insurance
@@ -181,13 +217,17 @@ voters_by_Medical_insurance
 ```{r}
 #Figure 8: Graph 4.1
 # Education investment of each party and Participants' Education Level
-Voters5 <- tibble(vote, education_investment, education_level,emphasis_on_education_diploma)
+Voters5 <- tibble(vote, education_investment, 
+                  education_level,emphasis_on_education_diploma)
 Voter_table_5 <- data.frame(Voters4)
 
-voters_by_Education_level <- ggplot(Voter_table_4, aes(x = education_investment,fill = education_level)) 
-+ geom_bar(aes(y = (..count..)/sum(..count..))) + 
-          scale_y_continuous(labels=percent)+
-  labs(title = "Percentage of Education Investment from Each Party and Participants' Education Level ",
+voters_by_Education_level <- ggplot(
+  Voter_table_4, 
+  aes(x = education_investment,fill = education_level)) + 
+  geom_bar(aes(y = (..count..)/sum(..count..))) + 
+          scale_y_continuous(labels = scales::percent)+
+  labs(title = "Percentage of Education Investment from Each Party 
+       and Participants' Education Level ",
        x = "Different Parties",
        y = "Percentage") 
 voters_by_Education_level
@@ -198,7 +238,8 @@ voters_by_Education_level
 ```{r}
 #Figure 9: Graph 4.2
 # Participants' degree of emphasis on education
-voters_by_Education <- ggplot(Voter_table_4, aes(x = emphasis_on_education_diploma)) +
+voters_by_Education <- ggplot(Voter_table_4, 
+                              aes(x = emphasis_on_education_diploma)) +
     geom_bar(colour = "black",fill = "blue") +
     theme_classic() +
   labs(title = " Participants' degree of emphasis on education ",
@@ -206,5 +247,3 @@ voters_by_Education <- ggplot(Voter_table_4, aes(x = emphasis_on_education_diplo
        y = "Count") 
 voters_by_Education
 ```
-
-
